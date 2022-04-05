@@ -1,0 +1,18 @@
+name: 'add-gitconfig-url'
+description: 'Add a new url to a gitconfig file'
+inputs:
+  url:
+    description: 'targeted url'
+    required: true
+  instead-of:
+    description: 'instead of url'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      run: |
+        cat >> ~/.gitconfig << EOF
+        [url "${{ inputs.url }}"]
+          insteadOf = ${{ inputs.instead-of }}
+        EOF
